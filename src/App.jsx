@@ -1,5 +1,11 @@
+import AuthPage from "./pages/AuthPage";
+
 function App() {
-  return <div className="text-3xl">Divar Clone</div>;
+  return (
+    <div>
+      <AuthPage />
+    </div>
+  );
 }
 
 export default App;
