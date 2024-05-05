@@ -8,7 +8,10 @@ function SendOtpForm({ setStep, mobile, setMobile }) {
 
     const { response, error } = await sendOtp(mobile);
 
-    if (response) setStep(2);
+    if (response) {
+      setStep(2);
+      console.log(response.data.message);
+    }
 
     if (error) console.log(error.response.data.message);
   };
@@ -28,7 +31,7 @@ function SendOtpForm({ setStep, mobile, setMobile }) {
         value={mobile}
         onChange={(e) => setMobile(e.target.value)}
       />
-      <button type="submit" className="bg-blue-500 p-1">
+      <button type="submit">
         ارسال
       </button>
     </form>

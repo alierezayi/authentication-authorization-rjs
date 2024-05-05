@@ -32,11 +32,11 @@ api.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      const { response } = await getNewTokens();
+      const res = await getNewTokens();
 
-      if (!response) return;
+      if (!res?.response) return;
 
-      setCookie(response.data);
+      setCookie(res.response.data);
 
       return api(originalRequest);
     }
