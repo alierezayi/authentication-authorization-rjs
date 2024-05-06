@@ -1,38 +1,60 @@
-import { sendOtp } from "../../services/auth";
+import { sendOtp } from "@/services/auth";
+import { useState } from "react";
+import notify from "@/configs/notify";
+import useValidation from "@/hooks/useValidation";
 
 function SendOtpForm({ setStep, mobile, setMobile }) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { isInvalid } = useValidation(mobile, 11);
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
     if (mobile.length !== 11) return;
 
+    setIsLoading(true);
+
     const { response, error } = await sendOtp(mobile);
 
     if (response) {
       setStep(2);
-      console.log(response.data.message);
+
+      notify("success", "کد تایید با موفقیت ارسال شد.");
     }
 
-    if (error) console.log(error.response.data.message);
+    if (error) notify("error", "عملیات با شکست مواجه شد.");
+
+    setIsLoading(false);
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <p>ورود به حساب کاربری</p>
-      <div>
+    <form
+      onSubmit={submitHandler}
+      className="w-full md:w-[500px] flex flex-col border border-gray-300 p-8 rounded-md"
+    >
+      <p className="mb-5 text-lg font-normal">ورود به حساب کاربری</p>
+      <div className="text-xs text-gray-600 mb-5">
         برای استفاده از امکانات دیوار، لطفا شماره موبایل خود را وارد کنید. کد
         تایید به این شماره پیامک خواهد شد.
       </div>
-      <label htmlFor="input">شماره موبایل خود را وارد کنید</label>
+      <label htmlFor="input" className="text-sm">
+        شماره موبایل خود را وارد کنید
+      </label>
       <input
         id="input"
-        type="text"
+        type="number"
         placeholder="شماره موبایل"
+        className="border border-gray-300 p-2 rounded-md text-sm mt-2 mb-5 outline-none"
         value={mobile}
         onChange={(e) => setMobile(e.target.value)}
       />
-      <button type="submit">
-        ارسال
+      <button
+        type="submit"
+        disabled={isInvalid || isLoading}
+        className="w-fit py-2 px-4 bg-red-700 text-white rounded-md text-sm hover:bg-red-800 transition disabled:opacity-70 disabled:bg-red-700 disabled:cursor-not-allowed"
+      >
+        {isLoading ? "در حال ارسال . . ." : "ارسال کد تایید"}
       </button>
     </form>
   );
