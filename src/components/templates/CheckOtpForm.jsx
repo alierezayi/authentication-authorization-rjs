@@ -27,8 +27,11 @@ function CheckOtpForm({ code, setCode, setStep, mobile }) {
 
     if (response) {
       setCookie(response.data);
+
       navigate("/");
+
       refetch();
+      
       notify("success", "خوش آمدید");
     }
 
