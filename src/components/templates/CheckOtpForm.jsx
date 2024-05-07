@@ -3,23 +3,23 @@ import { checkOtp } from "@/services/auth";
 import { setCookie } from "@/utils/cookie";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "@/services/user";
-import useValidation from "@/hooks/useValidation";
 import notify from "@/configs/notify";
 import { useState } from "react";
+import { useAuthValidation } from "../../hooks/useValidation";
 
 function CheckOtpForm({ code, setCode, setStep, mobile }) {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isInvalid } = useValidation(code, 5);
+  const { isValidate } = useAuthValidation(code, 5);
 
   const { refetch } = useQuery(["profile"], getProfile);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (code.length !== 5) return;
+    if (isValidate) return;
 
     setIsLoading(true);
 
@@ -64,7 +64,7 @@ function CheckOtpForm({ code, setCode, setStep, mobile }) {
       />
       <button
         type="submit"
-        disabled={isInvalid || isLoading}
+        disabled={!isValidate || isLoading}
         className="w-fit py-2.5 px-4 bg-red-700 text-white rounded-md text-sm hover:bg-red-800 transition disabled:opacity-70 disabled:bg-red-700"
       >
         {isLoading ? "در حال پردازش . . ." : "تایید و ورود"}

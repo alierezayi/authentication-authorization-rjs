@@ -1,17 +1,17 @@
 import { sendOtp } from "@/services/auth";
 import { useState } from "react";
 import notify from "@/configs/notify";
-import useValidation from "@/hooks/useValidation";
+import { useAuthValidation } from "../../hooks/useValidation";
 
 function SendOtpForm({ setStep, mobile, setMobile }) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isInvalid } = useValidation(mobile, 11);
+  const { isValidate } = useAuthValidation(mobile, 11);
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (mobile.length !== 11) return;
+    if (isValidate) return;
 
     setIsLoading(true);
 
@@ -49,7 +49,7 @@ function SendOtpForm({ setStep, mobile, setMobile }) {
       />
       <button
         type="submit"
-        disabled={isInvalid || isLoading}
+        disabled={!isValidate || isLoading}
         className="w-fit py-2.5 px-4 bg-red-700 text-white rounded-md text-sm hover:bg-red-800 transition disabled:opacity-70 disabled:bg-red-700"
       >
         {isLoading ? "در حال ارسال . . ." : "ارسال کد تایید"}
