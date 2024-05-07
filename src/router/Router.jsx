@@ -11,9 +11,15 @@ import Loader from "../components/modules/Loader";
 function Router() {
   const { data, isLoading, error } = useQuery(["profile"], getProfile);
 
-  console.log({ data, isLoading, error });
+  // console.log({ data, isLoading, error });
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return (
+      <div className="w-full flex justify-center items-center h-screen">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <Routes>

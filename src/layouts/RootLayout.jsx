@@ -6,7 +6,7 @@ function RootLayout({ children }) {
   return (
     <>
       <Header />
-      <main className="mt-5">{children}</main>
+      <main className="my-5">{children}</main>
       <Footer />
     </>
   );

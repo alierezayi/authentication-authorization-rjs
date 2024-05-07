@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { addCategory } from "../../services/admin";
 import notify from "../../configs/notify";
@@ -6,10 +6,20 @@ import { useCategoryValidation } from "../../hooks/useValidation";
 
 function CategoryForm() {
   const [form, setForm] = useState({ name: "", slug: "", icon: "" });
+  const [showMessage, setShowMessage] = useState(false);
 
   const { isValidate } = useCategoryValidation(form, 3);
 
-  const { mutate, isLoading, error, data } = useMutation(addCategory);
+  const queryClient = useQueryClient();
+
+  const { mutate, isLoading, error, data } = useMutation(addCategory, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("get-categories");
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const changeHandler = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -28,13 +38,24 @@ function CategoryForm() {
     if (!!error) notify("error", error.message);
   }, [data, isLoading, error]);
 
+  useEffect(() => {
+    if (data?.status === 201) setShowMessage(true);
+
+    const timeout = setTimeout(() => {
+      setShowMessage(false);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, [data?.status]);
+  console.log(showMessage);
+
   return (
     <form onChange={changeHandler} onSubmit={submitHandler}>
       <h3 className="mb-7 border-b-2 border-red-800 w-fit pb-1.5 font-semibold">
         دسته بندی جدید
       </h3>
 
-      {data?.status === 201 && (
+      {showMessage && (
         <p className="bg-red-800 mb-5 text-white p-1.5 text-center rounded-md">
           دسته بندی با موفقیت اضافه شد.
         </p>

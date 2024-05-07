@@ -11,7 +11,7 @@ function SendOtpForm({ setStep, mobile, setMobile }) {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (isValidate) return;
+    if (!isValidate) return;
 
     setIsLoading(true);
 

@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
 function useAuthValidation(input, length) {
-  const [isValidate, setIsValidate] = useState(true);
+  const [isValidate, setIsValidate] = useState(false);
 
   useEffect(() => {
-    if (input.length === length) setIsValidate(false);
-    else setIsValidate(true);
+    if (input.length === length) setIsValidate(true);
+    else setIsValidate(false);
   }, [input]);
 
   return { isValidate };
 }
 
 function useCategoryValidation(form, length) {
-  const [isValidate, setIsValidate] = useState(true);
+  const [isValidate, setIsValidate] = useState(false);
 
   useEffect(() => {
     Object.values(form).every((str) => !(str === "") && str.length >= length)

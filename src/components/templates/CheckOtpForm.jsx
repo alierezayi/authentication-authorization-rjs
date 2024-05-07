@@ -19,7 +19,7 @@ function CheckOtpForm({ code, setCode, setStep, mobile }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (isValidate) return;
+    if (!isValidate) return;
 
     setIsLoading(true);
 
