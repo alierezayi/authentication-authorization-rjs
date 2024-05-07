@@ -31,8 +31,8 @@ function CheckOtpForm({ code, setCode, setStep, mobile }) {
       navigate("/");
 
       refetch();
-      
-      notify("success", "خوش آمدید");
+
+      notify("success", "ورود شما با موفقیت انجام شد.");
     }
 
     if (error) {
@@ -58,14 +58,14 @@ function CheckOtpForm({ code, setCode, setStep, mobile }) {
         id="input"
         type="text"
         placeholder="کد تایید"
-        className="border border-gray-300 p-2 rounded-md text-sm mt-2 mb-5 outline-none"
+        className="border border-gray-300 p-2.5 rounded-md text-sm mt-2 mb-5 outline-none"
         value={code}
         onChange={(e) => setCode(e.target.value)}
       />
       <button
         type="submit"
         disabled={isInvalid || isLoading}
-        className="w-fit py-2 px-4 bg-red-700 text-white rounded-md text-sm hover:bg-red-800 transition disabled:opacity-70 disabled:bg-red-700 disabled:cursor-not-allowed"
+        className="w-fit py-2.5 px-4 bg-red-700 text-white rounded-md text-sm hover:bg-red-800 transition disabled:opacity-70 disabled:bg-red-700"
       >
         {isLoading ? "در حال پردازش . . ." : "تایید و ورود"}
       </button>

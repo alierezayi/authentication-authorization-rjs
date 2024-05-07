@@ -8,7 +8,7 @@ const AuthPage = () => {
   const [code, setCode] = useState("");
   
   return (
-    <div className="px-5 min-h-screen flex justify-center items-center">
+    <div className="px-5 min-h-[calc(100vh-70px)] flex justify-center items-center">
       {step === 1 && (
         <SendOtpForm setStep={setStep} mobile={mobile} setMobile={setMobile} />
       )}

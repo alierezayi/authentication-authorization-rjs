@@ -16,13 +16,11 @@ function SendOtpForm({ setStep, mobile, setMobile }) {
     setIsLoading(true);
 
     const { response, error } = await sendOtp(mobile);
-
     if (response) {
       setStep(2);
 
       notify("success", "کد تایید با موفقیت ارسال شد.");
     }
-
     if (error) notify("error", "عملیات با شکست مواجه شد.");
 
     setIsLoading(false);
@@ -45,14 +43,14 @@ function SendOtpForm({ setStep, mobile, setMobile }) {
         id="input"
         type="number"
         placeholder="شماره موبایل"
-        className="border border-gray-300 p-2 rounded-md text-sm mt-2 mb-5 outline-none"
+        className="border border-gray-300 p-2.5 rounded-md text-sm mt-2 mb-5 outline-none"
         value={mobile}
         onChange={(e) => setMobile(e.target.value)}
       />
       <button
         type="submit"
         disabled={isInvalid || isLoading}
-        className="w-fit py-2 px-4 bg-red-700 text-white rounded-md text-sm hover:bg-red-800 transition disabled:opacity-70 disabled:bg-red-700 disabled:cursor-not-allowed"
+        className="w-fit py-2.5 px-4 bg-red-700 text-white rounded-md text-sm hover:bg-red-800 transition disabled:opacity-70 disabled:bg-red-700"
       >
         {isLoading ? "در حال ارسال . . ." : "ارسال کد تایید"}
       </button>
