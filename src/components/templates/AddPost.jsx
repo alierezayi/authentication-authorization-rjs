@@ -31,7 +31,6 @@ function AddPost() {
       setForm({ ...form, [name]: e.target.files[0] });
     }
   };
-  console.log(isValidate);
   const submitHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -47,7 +46,7 @@ function AddPost() {
   };
 
   return (
-    <form onChange={changeHandler} onSubmit={submitHandler}>
+    <form onChange={changeHandler} onSubmit={submitHandler} className="mb-20">
       <h3 className="mb-7 border-b-2 border-red-800 w-fit pb-1.5 font-semibold">
         افزودن آگهی
       </h3>
