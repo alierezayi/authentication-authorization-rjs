@@ -1,15 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { addCategory } from "../../services/admin";
-import notify from "../../configs/notify";
-import { useCategoryValidation } from "../../hooks/useValidation";
+import useFormValidation from "../../hooks/useValidation";
+import toast from "react-hot-toast";
 
 function CategoryForm() {
   const [form, setForm] = useState({ name: "", slug: "", icon: "" });
   const [showMessage, setShowMessage] = useState(false);
-
-  const { isValidate } = useCategoryValidation(form, 3);
-
+  const { isValidate } = useFormValidation(form);
   const queryClient = useQueryClient();
 
   const { mutate, isLoading, error, data } = useMutation(addCategory, {
@@ -17,7 +15,7 @@ function CategoryForm() {
       queryClient.invalidateQueries("get-categories");
     },
     onError: (error) => {
-      console.log(error);
+      toast.error(error);
     },
   });
 
@@ -26,28 +24,18 @@ function CategoryForm() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     if (!isValidate) return;
-
     mutate(form);
-
-    setForm({ name: "", slug: "", icon: "" });
+    // setForm({ name: "", slug: "", icon: "" });
   };
 
   useEffect(() => {
-    if (!!error) notify("error", error.message);
-  }, [data, isLoading, error]);
-
-  useEffect(() => {
     if (data?.status === 201) setShowMessage(true);
-
     const timeout = setTimeout(() => {
       setShowMessage(false);
     }, 5000);
-
     return () => clearTimeout(timeout);
   }, [data?.status]);
-  console.log(showMessage);
 
   return (
     <form onChange={changeHandler} onSubmit={submitHandler}>

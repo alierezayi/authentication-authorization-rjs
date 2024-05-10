@@ -3,42 +3,29 @@ import { checkOtp } from "@/services/auth";
 import { setCookie } from "@/utils/cookie";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "@/services/user";
-import notify from "@/configs/notify";
 import { useState } from "react";
-import { useAuthValidation } from "../../hooks/useValidation";
+import useFormValidation from "@/hooks/useValidation";
+import toast from "react-hot-toast";
 
 function CheckOtpForm({ code, setCode, setStep, mobile }) {
   const navigate = useNavigate();
-
   const [isLoading, setIsLoading] = useState(false);
-
-  const { isValidate } = useAuthValidation(code, 5);
+  const { isValidate } = useFormValidation(code, 5);
 
   const { refetch } = useQuery(["profile"], getProfile);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!isValidate) return;
-
     setIsLoading(true);
-
     const { response, error } = await checkOtp(mobile, code);
-
     if (response) {
       setCookie(response.data);
-
       navigate("/");
-
       refetch();
-
-      notify("success", "ورود شما با موفقیت انجام شد.");
+      toast.success("ورود شما با موفقیت انجام شد.");
     }
-
-    if (error) {
-      notify("error", "عملیات با شکست مواجه شد.");
-    }
-
+    if (error) toast.error("عملیات با شکست مواجه شد.");
     setIsLoading(false);
   };
 

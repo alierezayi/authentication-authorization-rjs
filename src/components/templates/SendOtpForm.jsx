@@ -1,28 +1,24 @@
 import { sendOtp } from "@/services/auth";
 import { useState } from "react";
-import notify from "@/configs/notify";
-import { useAuthValidation } from "../../hooks/useValidation";
+import useFormValidation from "../../hooks/useValidation";
+import toast from "react-hot-toast";
 
 function SendOtpForm({ setStep, mobile, setMobile }) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isValidate } = useAuthValidation(mobile, 11);
+  const { isValidate } = useFormValidation(mobile, 11);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
     if (!isValidate) return;
-
     setIsLoading(true);
-
     const { response, error } = await sendOtp(mobile);
     if (response) {
       setStep(2);
-
-      notify("success", "کد تایید با موفقیت ارسال شد.");
+      console.log("کد تایید با موفقیت ارسال شد.");
+      toast.success("کد تایید با موفقیت ارسال شد.");
     }
-    if (error) notify("error", "عملیات با شکست مواجه شد.");
-
+    if (error) toast.error("عملیات با شکست مواجه شد.");
     setIsLoading(false);
   };
 

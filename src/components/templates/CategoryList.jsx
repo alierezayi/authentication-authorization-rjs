@@ -5,7 +5,6 @@ import { HiOutlineTrash } from "react-icons/hi2";
 
 function CategoryList() {
   const { data, isFetching, error } = useQuery(["get-categories"], getCategory);
-  console.log({ data, isFetching, error });
 
   if (isFetching) return <Loader />;
 
