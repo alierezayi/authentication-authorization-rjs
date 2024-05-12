@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import Router from "./router/Router";
 import defaultOptions from "./configs/reactQuery";
 import RootLayout from "./layouts/RootLayout";
-import { Toaster } from "react-hot-toast";
+import { ModalContextProvider } from "./context/ModalContextProvider";
 
 function App() {
   const queryClient = new QueryClient({ defaultOptions });
@@ -11,10 +11,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <RootLayout>
-          <Router />
-          <Toaster />
-        </RootLayout>
+        <ModalContextProvider>
+          <RootLayout>
+            <Router />
+          </RootLayout>
+        </ModalContextProvider>
       </BrowserRouter>
     </QueryClientProvider>
   );

@@ -26,7 +26,6 @@ function CategoryForm() {
     e.preventDefault();
     if (!isValidate) return;
     mutate(form);
-    // setForm({ name: "", slug: "", icon: "" });
   };
 
   useEffect(() => {
@@ -38,7 +37,7 @@ function CategoryForm() {
   }, [data?.status]);
 
   return (
-    <form onChange={changeHandler} onSubmit={submitHandler}>
+    <form onChange={changeHandler} onSubmit={submitHandler} className="mt-20">
       <h3 className="mb-7 border-b-2 border-red-800 w-fit pb-1.5 font-semibold">
         دسته بندی جدید
       </h3>
