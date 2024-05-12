@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { addCategory } from "../../services/admin";
-import useFormValidation from "../../hooks/useValidation";
+import { addCategory } from "../../../services/admin";
+import useFormValidation from "../../../hooks/useValidation";
 import toast from "react-hot-toast";
 
 function CategoryForm() {

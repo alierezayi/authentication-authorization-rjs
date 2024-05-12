@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCategory } from "../../services/admin";
+import { getCategory } from "../../../services/admin";
 import { BsUpload } from "react-icons/bs";
 import { useState } from "react";
-import { getCookie } from "../../utils/cookie";
+import { getCookie } from "../../../utils/cookie";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import useFormValidation from "../../hooks/useValidation";
-import { createPost } from "../../services/user";
+import useFormValidation from "../../../hooks/useValidation";
+import { createPost } from "../../../services/user";
 
 function AddPost() {
   const [form, setForm] = useState({

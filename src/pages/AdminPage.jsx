@@ -1,5 +1,5 @@
-import CategoryForm from "@/components/templates/CategoryForm";
-import CategoryList from "@/components/templates/CategoryList";
+import CategoryForm from "@/components/templates/categories/CategoryForm";
+import CategoryList from "@/components/templates/categories/CategoryList";
 
 function AdminPage() {
   return (

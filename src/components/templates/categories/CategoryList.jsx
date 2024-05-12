@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCategory } from "../../services/admin";
-import Loader from "../modules/Loader";
+import { getCategory } from "../../../services/admin";
+import Loader from "../../modules/Loader";
 import { HiOutlineTrash } from "react-icons/hi2";
-import { useModal } from "../../context/ModalContextProvider";
-import DeleteCategoryModal from "./DeleteCategoryModal";
+import { useModal } from "../../../context/ModalContextProvider";
+import DeleteCategoryModal from "../modals/DeleteCategoryModal";
 
 function CategoryList() {
   const { data, isFetching, error } = useQuery(["get-categories"], getCategory);

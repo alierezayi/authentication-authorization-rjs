@@ -1,6 +1,6 @@
 import { sendOtp } from "@/services/auth";
 import { useState } from "react";
-import useFormValidation from "../../hooks/useValidation";
+import useFormValidation from "../../../hooks/useValidation";
 import toast from "react-hot-toast";
 
 function SendOtpForm({ setStep, mobile, setMobile }) {
@@ -15,7 +15,6 @@ function SendOtpForm({ setStep, mobile, setMobile }) {
     const { response, error } = await sendOtp(mobile);
     if (response) {
       setStep(2);
-      console.log("کد تایید با موفقیت ارسال شد.");
       toast.success("کد تایید با موفقیت ارسال شد.");
     }
     if (error) toast.error("عملیات با شکست مواجه شد.");

@@ -1,5 +1,5 @@
-import AddPost from "../components/templates/AddPost";
-import PostList from "../components/templates/PostList";
+import AddPost from "../components/templates/posts/AddPost";
+import PostList from "../components/templates/posts/PostList";
 
 function DashboardPage() {
   return (
