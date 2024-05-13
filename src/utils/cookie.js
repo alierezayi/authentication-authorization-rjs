@@ -15,4 +15,8 @@ const getCookie = (cookieName) => {
     ?.split("=")[1];
 };
 
-export { setCookie, getCookie };
+const removeCookie = (cookieName) => {
+  document.cookie = `${cookieName}=; Max-Age=-99999999; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+};
+
+export { setCookie, getCookie, removeCookie };

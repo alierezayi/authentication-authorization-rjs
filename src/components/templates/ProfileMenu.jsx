@@ -4,14 +4,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { getProfile } from "@/services/user";
 import { GrUserAdmin } from "react-icons/gr";
 import { HiOutlineLogout } from "react-icons/hi";
+import { useModal } from "../../context/ModalContextProvider";
+import LogoutModal from "./modals/LogoutModal";
 
 function ProfileMenu() {
   const [isVisible, setIsVisible] = useState(false);
-  const { data, isLoading } = useQuery(["profile"], getProfile);
+  const { data, isLoading, refetch } = useQuery(["profile"], getProfile);
   const navigate = useNavigate();
+  const { openModal } = useModal();
 
   const toggleVisibility = () => {
     data?.data ? setIsVisible(!isVisible) : navigate("/auth");
+  };
+
+  const logoutHandler = () => {
+    setIsVisible(false);
+    openModal(<LogoutModal />);
   };
 
   return (
@@ -38,7 +46,10 @@ function ProfileMenu() {
                 <span className="text-sm">پنل ادمین</span>
               </Link>
             )}
-            <button className="flex gap-2 items-center hover:bg-gray-100 w-full px-2 py-3 rounded-md text-red-600 font-medium">
+            <button
+              className="flex gap-2 items-center hover:bg-gray-100 w-full px-2 py-3 rounded-md text-red-600 font-medium"
+              onClick={logoutHandler}
+            >
               <HiOutlineLogout className="text-lg" />
               <span className="text-sm">خروج از حساب کاربری</span>
             </button>
