@@ -29,4 +29,6 @@ const createPost = async (formData) => {
 
 const getPosts = () => api.get("post/my");
 
-export { getProfile, createPost, getPosts };
+const getAllPosts = () => api.get("");
+
+export { getProfile, createPost, getPosts, getAllPosts };

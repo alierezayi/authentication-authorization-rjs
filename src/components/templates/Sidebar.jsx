@@ -1,14 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import { getCategory } from "../../services/admin";
-
-function Sidebar() {
-  const { data, isFetching, error } = useQuery(["get-categories"], getCategory);
-
+function Sidebar({ data }) {
   return (
     <div className="w-[200px]">
       <h3 className="font-semibold mb-7 mr-3">دسته بندی ها</h3>
       <ul className="flex flex-col gap-2">
-        {data?.data.map((category) => (
+        {data?.map((category) => (
           <li key={category._id}>
             <button className="flex items-center gap-3 hover:bg-gray-100 w-full p-2.5 rounded-md">
               <img
