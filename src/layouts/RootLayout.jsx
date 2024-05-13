@@ -8,7 +8,7 @@ function RootLayout({ children }) {
   return (
     <>
       <Header />
-      <main className="my-5 px-2">{children}</main>
+      <main className="my-10 px-2">{children}</main>
       <Footer />
       <Toaster />
       <Modal />

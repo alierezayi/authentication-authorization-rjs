@@ -9,7 +9,7 @@ import LogoutModal from "./modals/LogoutModal";
 
 function ProfileMenu() {
   const [isVisible, setIsVisible] = useState(false);
-  const { data, isLoading, refetch } = useQuery(["profile"], getProfile);
+  const { data, isLoading } = useQuery(["profile"], getProfile);
   const navigate = useNavigate();
   const { openModal } = useModal();
 

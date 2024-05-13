@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useModal } from "../../../context/ModalContextProvider";
-import { deleteCategory } from "../../../services/admin";
+import { useModal } from "@/context/ModalContextProvider";
+import { deleteCategory } from "@/services/admin";
 import toast from "react-hot-toast";
-import Loader from "../../modules/Loader";
+import Loader from "@/components/modules/Loader";
 import { useQueryClient } from "@tanstack/react-query";
 
 function DeleteCategoryModal({ _id, name }) {
