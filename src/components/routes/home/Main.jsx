@@ -1,4 +1,4 @@
-import { sp } from "../../utils/numbers";
+import { sp } from "../../../utils/numbers";
 
 function Main({ data }) {
   return (
@@ -9,15 +9,18 @@ function Main({ data }) {
           className="w-[330px] flex justify-between border rounded-md m-2.5 p-4"
         >
           <div className="flex flex-col justify-between">
-            <p>{post.options.title}</p>
+            <p className="font-semibold">{post.options?.title}</p>
             <div className="text-gray-600 text-sm">
               <p>{sp(post.amount)} تومان</p>
-              <span>{post.options.city}</span>
+              <span>{post.options?.city}</span>
             </div>
           </div>
           <img
-            src={`${import.meta.env.VITE_BASE_URL}${post.images[0]}`}
-            className="w-[150px] h-[130px] rounded"
+            src={
+              // `${import.meta.env.VITE_BASE_URL}${post.images[0]}` ||
+              "/no-camera.png"
+            }
+            className="w-[136px] aspect-square rounded"
           />
         </div>
       ))}

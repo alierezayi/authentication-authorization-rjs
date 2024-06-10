@@ -16,7 +16,6 @@ function ProfileMenu() {
   const toggleVisibility = () => {
     data?.data ? setIsVisible(!isVisible) : navigate("/auth");
   };
-
   const logoutHandler = () => {
     setIsVisible(false);
     openModal(<LogoutModal />);
@@ -32,7 +31,6 @@ function ProfileMenu() {
         <img src="profile.svg" className="w-4" alt="profile" />
         دیوار من
       </button>
-
       {isVisible && (
         <div className="absolute top-14 w-[200px] bg-white border shadow p-2 rounded-md">
           <div className="divide-y">

@@ -19,12 +19,15 @@ function PostList() {
           className="flex items-center border p-1.5 my-2.5 rounded-md"
         >
           <img
-            src={`${import.meta.env.VITE_BASE_URL}${post.images[0]}`}
-            className="w-[100px] h-[70px] rounded ml-7"
+            src={
+              // `${import.meta.env.VITE_BASE_URL}${post.images[0]}` ||
+              "/no-camera.png"
+            }
+            className="w-[100px] aspect-square rounded ml-7"
           />
           <div className="flex-1">
-            <p>{post.options.title}</p>
-            <div className="text-sm text-gray-500">{post.options.content}</div>
+            <p>{post.options?.title}</p>
+            <div className="text-sm text-gray-500">{post.options?.content}</div>
           </div>
           <div className="flex-1 flex flex-col items-end pl-5">
             <p className="text-center">

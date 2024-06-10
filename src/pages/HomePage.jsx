@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import Main from "../components/templates/Main";
+import Main from "../components/routes/home/Main";
 import Sidebar from "../components/templates/Sidebar";
 import { getAllPosts } from "../services/user";
 import Loader from "@/components/modules/Loader";
